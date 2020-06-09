@@ -77,7 +77,6 @@ class CheckoutController extends Controller
 ### 需要開立發票時
  - 加上 withInvoice($invData) 即可。
  - 開立發票時，產品內容必須要符合即定格式傳送，不能只帶 ItemName 及 TotalAmount
- - 開立發票時，特店必須要有會員系統並傳送會員相關資料
  - 測試開立發票時，MerchantID 請設 2000132
 ##### 範例  
 ```php

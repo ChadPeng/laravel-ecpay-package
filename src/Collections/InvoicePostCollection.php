@@ -62,13 +62,14 @@ class InvoicePostCollection extends Collection
         $donation = $this->attributes['Donation'] ?? 2;
         $invType = $this->attributes['InvType'] ?? '07';
         $customerIdentifier = $this->attributes['CustomerIdentifier'] ?? '';
+        $customUserId = $this->attributes['UserId'] ?? '';
         $customerName = StringService::replaceSymbol(urlencode($this->attributes['CustomerName'] ?? ''));
         $customerAddress = StringService::replaceSymbol(urlencode($this->attributes['CustomerAddr'] ?? ''));
         $customEmail = StringService::replaceSymbol(urlencode($this->attributes['CustomerEmail'] ?? ''));
         $customPhone = $this->attributes['CustomerPhone'] ?? '';
 
         $this->put('RelateNumber', $this->attributes['MerchantTradeNo']??
-            StringService::identifyNumberGenerator('O'));
+                                 StringService::identifyNumberGenerator('O'));
         $this->put('TaxType', (string)$taxType);
         $this->put('SalesAmount', $amount);
         $this->put('ItemName', StringService::replaceSymbol(urlencode((string)$itemNameInvoice)));
@@ -79,7 +80,7 @@ class InvoicePostCollection extends Collection
         $this->put('InvType', (string)$invType);
         $this->put('Print', (string)$print);
 
-        $this->put('CustomerID', (string)$this->attributes['UserId']);
+        $this->put('CustomerID', (string)$customUserId);
         $this->put('CustomerIdentifier', $customerIdentifier);
         if ($print == 0) {
             if (empty($carruerType) && empty($donation)) {
@@ -103,7 +104,7 @@ class InvoicePostCollection extends Collection
             if (empty($customEmail) && empty($customPhone)) {
                 $validator->getMessageBag()
                     ->add('CustomerEmail and CustomerPhone',
-                        'CustomerEmail and CustomerPhone can not be empty at the same time while Print is 1');
+                          'CustomerEmail and CustomerPhone can not be empty at the same time while Print is 1');
             }
         }
         if (!empty($customerIdentifier)) {
@@ -184,6 +185,7 @@ class InvoicePostCollection extends Collection
         $customerAddress = StringService::replaceSymbol(urlencode($this->attributes['CustomerAddr'] ?? ''));
         $customEmail = StringService::replaceSymbol(urlencode($this->attributes['CustomerEmail'] ?? ''));
         $customPhone = $this->attributes['CustomerPhone'] ?? '';
+        $customUserId = $this->attributes['UserId'] ?? '';
 
         $this->put('InvoiceMark', 'Y');
         $this->put('RelateNumber', $this->attributes['MerchantTradeNo']??StringService::identifyNumberGenerator('O'));
@@ -196,7 +198,7 @@ class InvoicePostCollection extends Collection
         $this->put('InvType', $invType);
         $this->put('Print', (string)$print);
 
-        $this->put('CustomerID', (string)$this->attributes['UserId']);
+        $this->put('CustomerID', (string)$customUserId);
         $this->put('CustomerIdentifier', $customerIdentifier);
         if ($print == 0) {
             if (empty($carruerType) && empty($donation)) {
@@ -219,7 +221,7 @@ class InvoicePostCollection extends Collection
             if (empty($customEmail) && empty($customPhone)) {
                 $validator->getMessageBag()
                     ->add('CustomerEmail and CustomerPhone',
-                        'CustomerEmail and CustomerPhone can not be empty at the same time while Print is 1');
+                          'CustomerEmail and CustomerPhone can not be empty at the same time while Print is 1');
             }
         }
         if (!empty($customerIdentifier)) {
