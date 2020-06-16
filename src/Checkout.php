@@ -103,6 +103,7 @@ class Checkout
     public function withInvoice($invData)
     {
         $invPostData = new InvoicePostCollection;
+        $invData['MerchantTradeNo'] = $this->postData->get('MerchantTradeNo') ?? null;
         $invPostData->setData($invData)->setPostDataForCheckout();
         $this->postData = collect(array_merge($this->postData->all(), $invPostData->all()));
         return $this;
